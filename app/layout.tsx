@@ -5,7 +5,13 @@ import Providers from "@/components/Providers";
 export const metadata: Metadata = {
   title: "Annaya Boutique",
   description: "Exquisite ethnic & contemporary fashion — where tradition meets modern luxury.",
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png", shortcut: "/favicon-16x16.png" },
+  manifest: "/site.webmanifest",
+  appleWebApp: { title: "Annaya Boutique", statusBarStyle: "default", capable: true },
+};
+
+export const viewport = {
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
