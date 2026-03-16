@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store/cartStore";
@@ -38,7 +39,7 @@ export function ProductCard({ product }: { product: Record<string, unknown> }) {
   return (
     <motion.div whileHover={{ y: -8 }} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100">
       <Link href={`/product/${product.slug}`} className="block relative aspect-[4/5] overflow-hidden bg-slate-50">
-        <img src={(product.images as string[])[0]} alt={product.name as string} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
+        <Image src={(product.images as string[])[0]} alt={product.name as string} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
         {(product.discountPercent as number) > 0 && (
           <div className="absolute top-3 left-3 bg-gold text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">{product.discountPercent as number}% OFF</div>
         )}

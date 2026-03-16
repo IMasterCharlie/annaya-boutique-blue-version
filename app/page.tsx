@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, RefreshCw, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import api from "@/lib/api";
@@ -97,7 +98,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {categories.map((cat) => (
               <Link key={cat.name} href={cat.path} className="group relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md">
-                <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" referrerPolicy="no-referrer" />
+                <Image src={cat.img} alt={cat.name} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-royal/90 via-transparent to-transparent flex flex-col justify-end p-4">
                   <h3 className="text-white font-serif font-bold text-lg">{cat.name}</h3>
                   <span className="text-white/60 text-[10px] uppercase tracking-widest">Explore</span>
@@ -163,7 +164,7 @@ export default function HomePage() {
                     className={`bg-white rounded-2xl p-5 shadow-sm border border-slate-100 ${offset === 0 ? "ring-1 ring-royal/10" : ""}`}>
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full border-2 border-slate-100 bg-slate-50" />
+                        <Image src={t.avatar} alt={t.name} width={44} height={44} unoptimized className="rounded-full border-2 border-slate-100 bg-slate-50" />
                         <div><p className="font-bold text-slate-800 text-sm">{t.name}</p><p className="text-xs text-slate-400">{t.duration}</p></div>
                       </div>
                       <div className="text-4xl font-serif font-black text-gold/30 leading-none select-none">❝</div>

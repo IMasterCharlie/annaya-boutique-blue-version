@@ -4,13 +4,17 @@ import connectDB from "@/lib/mongodb";
 import Product from "@/models/Product";
 import { getCategoriesFromJSON } from "@/lib/jsonDb";
 
+export const revalidate = 60;
+
 export async function GET() {
   try {
     await connectDB();
 
     if (mongoose.connection.readyState !== 1) {
       const categories = await getCategoriesFromJSON();
-      return NextResponse.json(categories);
+      return NextResponse.json(categories, {
+        headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+      });
     }
 
     const priorityCategories = [
@@ -39,7 +43,9 @@ export async function GET() {
       })
     );
 
-    return NextResponse.json([...results, ...otherResults].filter((c) => c.name));
+    return NextResponse.json([...results, ...otherResults].filter((c) => c.name), {
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+    });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ message: "Error fetching categories", error: msg }, { status: 500 });

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { ShoppingBag, Heart, User, Search, Home, Grid, X, Loader2 } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
@@ -81,7 +82,7 @@ function ResultsPanel({ query, results, loading, showPanel, onProductClick, onVi
                 className="w-full flex items-center gap-4 px-4 py-3.5 hover:bg-slate-50 transition-colors group text-left focus:outline-none">
                 <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-100 group-hover:border-royal/30 transition-colors">
                   {(product.images as string[])?.[0] ? (
-                    <img src={(product.images as string[])[0]} alt={product.name as string} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <Image src={(product.images as string[])[0]} alt={product.name as string} width={56} height={56} className="object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : <div className="w-full h-full flex items-center justify-center text-slate-300 text-[10px]">No img</div>}
                 </div>
                 <div className="flex-1 min-w-0">

@@ -5,6 +5,8 @@ import Product from "@/models/Product";
 import { requireAdmin } from "@/lib/adminAuth";
 import { queryProductsJSON } from "@/lib/jsonDb";
 
+export const revalidate = 60;
+
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const category = searchParams.get("category") ?? undefined;
@@ -24,7 +26,9 @@ export async function GET(req: NextRequest) {
         minPrice: minPrice ? Number(minPrice) : undefined,
         maxPrice: maxPrice ? Number(maxPrice) : undefined,
       });
-      return NextResponse.json(products);
+      return NextResponse.json(products, {
+        headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+      });
     }
 
     let query: Record<string, unknown> = {};
@@ -63,7 +67,9 @@ export async function GET(req: NextRequest) {
     if (sort === "rating") sortQuery = { rating: -1 };
 
     const products = await Product.find(query).sort(sortQuery);
-    return NextResponse.json(products);
+    return NextResponse.json(products, {
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+    });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ message: "Error fetching products", error: msg }, { status: 500 });

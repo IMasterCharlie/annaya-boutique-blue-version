@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ShoppingBag, Heart, Star, ChevronLeft, ChevronRight, MessageCircle, Truck, RefreshCw } from "lucide-react";
@@ -79,7 +80,7 @@ export default function ProductDetailPage() {
             {/* Image Gallery */}
             <div className="space-y-4">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-slate-50 shadow-lg">
-                <img src={images[activeImg]} alt={product.name as string} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <Image src={images[activeImg]} alt={product.name as string} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 <div className="absolute inset-y-0 left-0 flex items-center p-2">
                   <button onClick={() => setActiveImg((p) => (p > 0 ? p - 1 : images.length - 1))} className="p-2 rounded-full glass hover:bg-white transition-colors"><ChevronLeft className="w-6 h-6" /></button>
                 </div>
@@ -90,7 +91,7 @@ export default function ProductDetailPage() {
               <div className="flex gap-4 overflow-x-auto no-scrollbar">
                 {images.map((img, i) => (
                   <button key={i} onClick={() => setActiveImg(i)} className={cn("relative w-20 aspect-[4/5] rounded-xl overflow-hidden border-2 silk-transition flex-shrink-0", activeImg === i ? "border-royal" : "border-transparent")}>
-                    <img src={img} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <Image src={img} alt="" fill sizes="80px" className="object-cover" />
                   </button>
                 ))}
               </div>
