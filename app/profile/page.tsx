@@ -237,7 +237,7 @@ export default function ProfilePage() {
                 {(dbUser?.addresses as Record<string, unknown>[])?.length > 0 ? (
                   (dbUser!.addresses as Record<string, unknown>[]).map((addr) => (
                     <div key={addr._id as string} className={cn("p-6 rounded-2xl border-2 relative", addr.isDefault ? "border-royal bg-royal/5" : "border-slate-100")}>
-                      {addr.isDefault && <div className="absolute top-4 right-4 text-[10px] font-bold text-royal bg-white px-2 py-1 rounded-full border border-royal/20">DEFAULT</div>}
+                      {Boolean(addr.isDefault) && <div className="absolute top-4 right-4 text-[10px] font-bold text-royal bg-white px-2 py-1 rounded-full border border-royal/20">DEFAULT</div>}
                       <p className="font-bold text-slate-900 mb-1">{addr.fullName as string}</p>
                       <p className="text-sm text-slate-500 mb-3">{addr.phoneNumber as string}</p>
                       <p className="text-sm text-slate-600 leading-relaxed">{addr.addressLine1 as string}<br />{addr.city as string}, {addr.state as string} — {addr.postalCode as string}<br />{addr.country as string}</p>

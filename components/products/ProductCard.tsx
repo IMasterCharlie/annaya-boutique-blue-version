@@ -42,7 +42,7 @@ export function ProductCard({ product }: { product: Record<string, unknown> }) {
         {(product.discountPercent as number) > 0 && (
           <div className="absolute top-3 left-3 bg-gold text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">{product.discountPercent as number}% OFF</div>
         )}
-        {product.isNewArrival && (
+        {Boolean(product.isNewArrival) && (
           <div className="absolute top-3 left-3 bg-sapphire text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider mt-7">New</div>
         )}
         <button onClick={handleToggleWishlist} className={cn("absolute top-3 right-3 p-2 rounded-full glass silk-transition", isWishlisted ? "text-rose-500" : "text-slate-400 hover:text-rose-500")}>

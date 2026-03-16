@@ -50,7 +50,7 @@ function CustomerTab({ usersList, adminAuthId }: { usersList: Record<string, unk
               <h3 className="text-2xl font-bold text-slate-900 tracking-tight">{u.name as string}</h3>
               <div className="flex flex-wrap gap-4 mt-2">
                 <span className="flex items-center gap-1.5 text-sm text-slate-500 font-medium"><Mail className="w-3.5 h-3.5 text-royal/60" />{u.email as string}</span>
-                {u.phone && <span className="flex items-center gap-1.5 text-sm text-slate-500 font-medium"><Phone className="w-3.5 h-3.5 text-royal/60" />{u.phone as string}</span>}
+                {Boolean(u.phone) && <span className="flex items-center gap-1.5 text-sm text-slate-500 font-medium"><Phone className="w-3.5 h-3.5 text-royal/60" />{u.phone as string}</span>}
               </div>
               <span className={cn("mt-3 inline-block px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest ring-1 ring-inset", u.role === "admin" ? "bg-royal text-gold ring-gold/20" : "bg-slate-100 text-slate-500 ring-slate-200")}>{u.role as string || "Customer"}</span>
             </div>
@@ -313,7 +313,7 @@ export default function AdminPage() {
                     ))}
                   </div>
                   {/* Address */}
-                  {selectedAdminOrder.shippingAddress && (
+                  {Boolean(selectedAdminOrder.shippingAddress) && (
                     <div>
                       <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-3"><MapPin className="w-5 h-5 text-royal" /> Destination</h4>
                       <div className="bg-slate-50/50 p-8 rounded-[32px] border border-slate-100">

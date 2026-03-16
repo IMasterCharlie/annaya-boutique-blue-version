@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
       query.price = priceFilter;
     }
 
-    let sortQuery: Record<string, number> = { createdAt: -1 };
+    let sortQuery: Record<string, 1 | -1> = { createdAt: -1 };
     if (sort === "price-asc") sortQuery = { price: 1 };
     if (sort === "price-desc") sortQuery = { price: -1 };
     if (sort === "rating") sortQuery = { rating: -1 };

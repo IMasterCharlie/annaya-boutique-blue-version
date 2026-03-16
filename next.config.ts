@@ -8,10 +8,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.transparenttextures.com" },
     ],
   },
-  // Allow large body sizes for image uploads
-  api: {
-    bodyParser: false,
-  },
 };
 
 export default nextConfig;

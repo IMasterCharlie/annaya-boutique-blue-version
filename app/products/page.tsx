@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Filter, X, Search } from "lucide-react";
 import { motion } from "framer-motion";
@@ -47,7 +47,7 @@ function PriceRangeFilter({ minPrice, maxPrice, onApply }: { minPrice: string; m
   );
 }
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -201,5 +201,13 @@ export default function ProductsPage() {
         )}
       </div>
     </ShellLayout>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<ShellLayout><div className="min-h-screen flex items-center justify-center text-royal font-bold">Loading collection...</div></ShellLayout>}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }
