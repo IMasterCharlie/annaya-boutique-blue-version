@@ -1,4 +1,5 @@
 # Node modules
+.next/
 node_modules/
 
 # Environment variables (secrets)
