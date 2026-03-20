@@ -1,20 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, RefreshCw, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ArrowRight, ShieldCheck, RefreshCw } from "lucide-react";
 import { ProductCard } from "@/components/products/ProductCard";
 import ShellLayout from "@/components/ShellLayout";
 
-const testimonials = [
-  { name: "Lavanya", duration: "One Year With Us", avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Lavanya&backgroundColor=b6e3f4", review: "The kurti I ordered arrived on time, looked exactly like the picture — and was even more beautiful in person! The quality is high and the fit is perfect. Thank you, Annaya Boutique!" },
-  { name: "Sravani", duration: "One Year With Us", avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Sravani&backgroundColor=c0aede", review: "This is my 6th order from Annaya! After seeing and using your outfits, I've completely stopped visiting shops. The quality is amazing and your response is always awesome. Thank you so much!" },
-  { name: "Sukanya", duration: "Happy Customer", avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Sukanya&backgroundColor=ffd5dc", review: "The product looks exactly like the picture. I'm completely satisfied with it. The fabric quality is outstanding and delivery was super fast. Thanks, Annaya Boutique!" },
-  { name: "Priya Sharma", duration: "Regular Customer", avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Priya&backgroundColor=d1f4cc", review: "Absolutely love the lehenga I ordered for my cousin's wedding! Got so many compliments. The embroidery work is exquisite and packaging was beautiful. Will definitely order again!" },
-  { name: "Meena Reddy", duration: "Two Years With Us", avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Meena&backgroundColor=ffdfbf", review: "I've been shopping here for two years and never once been disappointed. The customer service is warm and helpful, and every outfit is exactly as shown. Truly a boutique that cares!" },
-];
+const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+  ssr: false,
+  loading: () => <div className="py-20 bg-slate-50 flex justify-center text-slate-400">Loading reviews...</div>
+});
 
 const categories = [
   { name: "Lehenga", img: "https://res.cloudinary.com/douvhybil/image/upload/v1773507187/annaya-boutique/lehengas/ydg4qczdt7hi8cxor4nj.jpg", path: "/category/Lehenga" },
@@ -26,10 +22,6 @@ const categories = [
 ];
 
 export default function HomePageClient({ bestSellers, newArrivals }: { bestSellers: Record<string, unknown>[]; newArrivals: Record<string, unknown>[]; }) {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const prevT = () => setCurrentTestimonial((p) => (p === 0 ? testimonials.length - 1 : p - 1));
-  const nextT = () => setCurrentTestimonial((p) => (p === testimonials.length - 1 ? 0 : p + 1));
 
   return (
     <ShellLayout>
@@ -38,24 +30,24 @@ export default function HomePageClient({ bestSellers, newArrivals }: { bestSelle
           <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
           <div className="absolute top-[-10%] right-[-10%] w-[50%] aspect-square bg-gold/20 rounded-full blur-[120px]" />
           <div className="absolute bottom-[-10%] left-[-10%] w-[40%] aspect-square bg-sky/20 rounded-full blur-[100px]" />
-          <div className="relative z-10 max-w-4xl mx-auto py-10 px-4 text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-bold tracking-[3px] uppercase mb-8">
+          <div className="relative z-10 max-w-4xl mx-auto py-10 px-4 text-center anim-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-bold tracking-[3px] uppercase mb-8">
               New Collection 2026
-            </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6">
+            </div>
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6">
               Elegance <span className="text-gold">Redefined.</span><br />Crafted for You.
-            </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-white/70 text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
+            </h1>
+            <p className="text-white/70 text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
               Discover our curated collection of ethnic and western wear — where tradition meets modern luxury.
-            </motion.p>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/products" className="w-full sm:w-auto px-8 py-4 bg-gold text-white font-bold rounded-full hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all flex items-center justify-center gap-2">
                 Shop Now <ArrowRight className="w-5 h-5" />
               </Link>
               <Link href="/products" className="w-full sm:w-auto px-8 py-4 bg-white/10 text-white font-bold rounded-full backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all text-center">
                 Explore Collections
               </Link>
-            </motion.div>
+            </div>
             <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16">
               <div className="flex items-center gap-3 text-white/60 text-sm"><ShieldCheck className="w-5 h-5 text-gold" /> 3-4 Days Delivery</div>
               <div className="flex items-center gap-3 text-white/60 text-sm"><ShieldCheck className="w-5 h-5 text-gold" /> 100% Safe &amp; Secure</div>
@@ -117,42 +109,7 @@ export default function HomePageClient({ bestSellers, newArrivals }: { bestSelle
           </div>
         </section>
 
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-2xl mx-auto px-4">
-            <div className="flex items-start justify-between mb-10">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-royal leading-tight">Client&apos;s Feedback <br />&amp; Trust</h2>
-              <div className="flex gap-2 mt-2 shrink-0">
-                <button onClick={prevT} className="w-10 h-10 rounded-full bg-royal text-white flex items-center justify-center hover:bg-royal/80 transition-colors shadow-md"><ChevronLeft className="w-5 h-5" /></button>
-                <button onClick={nextT} className="w-10 h-10 rounded-full border-2 border-slate-200 text-slate-400 flex items-center justify-center hover:border-royal hover:text-royal transition-colors"><ChevronRight className="w-5 h-5" /></button>
-              </div>
-            </div>
-            <div className="space-y-4">
-              {[0, 1, 2].map((offset) => {
-                const idx = (currentTestimonial + offset) % testimonials.length;
-                const t = testimonials[idx];
-                return (
-                  <motion.div key={`${idx}-${offset}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: offset * 0.05 }}
-                    className={`bg-white rounded-2xl p-5 shadow-sm border border-slate-100 ${offset === 0 ? "ring-1 ring-royal/10" : ""}`}>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <Image src={t.avatar} alt={t.name} width={44} height={44} unoptimized className="rounded-full border-2 border-slate-100 bg-slate-50" />
-                        <div><p className="font-bold text-slate-800 text-sm">{t.name}</p><p className="text-xs text-slate-400">{t.duration}</p></div>
-                      </div>
-                      <div className="text-4xl font-serif font-black text-gold/30 leading-none select-none">❝</div>
-                    </div>
-                    <div className="flex gap-0.5 mb-2">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />)}</div>
-                    <p className="text-slate-600 text-sm leading-relaxed">&quot;{t.review}&quot;</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, i) => (
-                <button key={i} onClick={() => setCurrentTestimonial(i)} className={`w-2 h-2 rounded-full transition-all ${i === currentTestimonial ? "bg-royal w-5" : "bg-slate-300"}`} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <Testimonials />
       </div>
     </ShellLayout>
   );

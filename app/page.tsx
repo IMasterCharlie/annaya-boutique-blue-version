@@ -1,6 +1,6 @@
 import connectDB from "@/lib/mongodb";
 import Product from "@/models/Product";
-import HomePageClient from "@/app/HomePageClient";
+import HomePageClient from "./HomePageClient";
 
 export const revalidate = 3600;
 

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
 import Product from "@/models/Product";
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export async function GET() {
   try {

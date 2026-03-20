@@ -4,7 +4,7 @@ import connectDB from "@/lib/mongodb";
 import Product from "@/models/Product";
 import { requireAdmin } from "@/lib/adminAuth";
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;

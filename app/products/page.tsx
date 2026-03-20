@@ -4,7 +4,8 @@ import ProductsClient from "./ProductsClient";
 import { Suspense } from "react";
 import ShellLayout from "@/components/ShellLayout";
 
-export const revalidate = 1800;
+export const dynamic = "force-static";
+export const revalidate = 3600;
 
 const HARDCODED_FROCK_PRIORITY_PRODUCTS = [
   { _id: "69a35e8643e117e303520c39", name: "Red & Black Ombre Festive Gown", slug: "red-black-ombre-festive-gown", description: "Bold and elegant...", category: "Frock", images: ["https://res.cloudinary.com/douvhybil/image/upload/v1772314245/AWP%20Shopping-products/uwsey4hgzov8pdofqovc.jpg"], price: 500, originalPrice: 588, discountPercent: 15, sizes: ["XS","S","M","L","XL","XXL","3XL","4XL","5XL"], colors: [{ name: "Red", hex: "#DC2626", _id: "2d968895fc2ef03b4a6976ba" }], stock: 34, rating: 5, reviewCount: 1293, isFeatured: false, isNewArrival: false, createdAt: "2026-02-28T21:30:46.491Z" },
